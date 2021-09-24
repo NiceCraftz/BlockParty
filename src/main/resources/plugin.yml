@@ -1,0 +1,12 @@
+name: BlockParty
+version: '${project.version}'
+main: net.coralmc.blockparty.BlockParty
+prefix: BlockParty
+authors: [ NiceCraftz ]
+description: BlockParty plugin for CoralMC
+website: https://coralmc.it
+
+commands:
+  blockparty:
+    description: "Comando principale del plugin"
+    aliases: [ "bp" ]

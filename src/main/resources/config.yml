@@ -1,0 +1,9 @@
+commands:
+  no-args: "&bSpecifica un &fargomento&b!"
+  unknown-arg: "&bArgomento &fnon riconosciuto&b!"
+  no-perms: "&bNon hai il &fpermesso &bdi &feseguire &bquesto comando!"
+
+
+settings:
+  corner-a: ""
+  corner-b: ""
