@@ -1,5 +1,6 @@
 package net.coralmc.blockparty.utils;
 
+import jdk.nashorn.internal.ir.Block;
 import net.coralmc.blockparty.BlockParty;
 import net.coralmc.blockparty.objects.CoralUser;
 import org.bukkit.Bukkit;
@@ -23,6 +24,7 @@ public class Utils {
                 Double.parseDouble(s[2]),
                 Double.parseDouble(s[3]));
     }
+
 
     public static Optional<CoralUser> getUser(BlockParty blockParty, UUID uuid) {
         return Optional.ofNullable(blockParty.getUserMap().get(uuid));

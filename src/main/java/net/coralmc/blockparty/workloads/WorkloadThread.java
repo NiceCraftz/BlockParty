@@ -9,6 +9,10 @@ public class WorkloadThread implements Runnable {
     private final ArrayDeque<Workload> workloads;
     private static final int MAX_MS_PER_TICK = 10;
 
+    public void add(Workload workload) {
+        workloads.add(workload);
+    }
+
     public WorkloadThread() {
         workloads = Queues.newArrayDeque();
     }

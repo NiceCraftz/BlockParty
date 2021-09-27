@@ -5,6 +5,7 @@ import me.imbuzz.dev.gamemaker.api.chat.ChatChannel;
 import net.coralmc.blockparty.BlockParty;
 import net.coralmc.blockparty.events.CustomDeathEvent;
 import net.coralmc.blockparty.objects.CoralUser;
+import net.coralmc.blockparty.objects.TeleportablePlayer;
 import net.coralmc.blockparty.utils.ColorAPI;
 import net.coralmc.blockparty.utils.ConfigurationHelper;
 import net.coralmc.blockparty.utils.Utils;
@@ -55,6 +56,7 @@ public class GameListener implements Listener {
         user.setChatChannel(ChatChannel.SPECTATOR);
         userPlayer.sendMessage(color(getString(blockParty, "events.died")));
 
+        blockParty.getWorkloadTrhead().add(new TeleportablePlayer(userPlayer, getLocation(blockParty, "locations.lobby")));
         blockParty.getUserMap().remove(userPlayer.getUniqueId());
 
         blockParty.getUserMap()
@@ -63,9 +65,9 @@ public class GameListener implements Listener {
                 .filter(CoralUser::isAlive)
                 .forEach(coralUser -> {
                     Player coralPlayer = coralUser.getPlayer();
-                    coralPlayer.sendMessage(color(getString(blockParty, "events.death-player",
-                            userPlayer.getName(),
-                            blockParty.getUserMap().size())));
+
+                    coralPlayer.sendMessage(color(getString(blockParty, "events.death-player", userPlayer.getName(), blockParty.getUserMap().size())));
+                    coralPlayer.sendMessage(color(getString(blockParty, "events.point")));
                 });
     }
 }
