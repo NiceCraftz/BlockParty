@@ -4,6 +4,11 @@ commands:
   no-perms: "&bNon hai il &fpermesso &bdi &feseguire &bquesto comando!"
 
 
+events:
+  player-death: "&f%s% &bè morto, ne rimangono &f%d%"
+  point: "&b+&f1 &bPunto"
+  died: "&bSei &fmorto&b!"
+
 settings:
   death-y: 30
   corner-a: ""

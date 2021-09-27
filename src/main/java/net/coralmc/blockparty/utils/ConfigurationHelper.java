@@ -9,6 +9,10 @@ public class ConfigurationHelper {
         return blockParty.getConfig().getConfiguration().getString(path);
     }
 
+    public static String getString(BlockParty blockParty, String path, Object... objects) {
+        return String.format(blockParty.getConfig().getConfiguration().getString(path), objects);
+    }
+
     public static List<String> getStringList(BlockParty blockParty, String path) {
         return blockParty.getConfig().getConfiguration().getStringList(path);
     }
