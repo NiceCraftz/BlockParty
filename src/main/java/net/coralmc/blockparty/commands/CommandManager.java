@@ -5,7 +5,7 @@ import net.coralmc.blockparty.BlockParty;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import utils.ColorAPI;
+import net.coralmc.blockparty.utils.ColorAPI;
 
 import java.util.Map;
 

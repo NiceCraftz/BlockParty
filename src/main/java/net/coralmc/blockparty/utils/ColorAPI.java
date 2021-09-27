@@ -1,4 +1,4 @@
-package utils;
+package net.coralmc.blockparty.utils;
 
 import net.coralmc.blockparty.BlockParty;
 import org.bukkit.ChatColor;
@@ -9,6 +9,6 @@ public class ColorAPI {
     }
 
     public static String color(BlockParty blockParty, String path) {
-        return color(blockParty.getConfig().getString(path));
+        return color(blockParty.getString(path));
     }
 }
