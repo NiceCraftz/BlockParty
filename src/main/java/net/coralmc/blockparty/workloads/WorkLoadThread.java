@@ -5,7 +5,7 @@ import com.google.common.collect.Queues;
 import java.util.ArrayDeque;
 import java.util.Objects;
 
-public class WorkloadThread implements Runnable {
+public class WorkLoadThread implements Runnable {
     private final ArrayDeque<Workload> workloads;
     private static final int MAX_MS_PER_TICK = 10;
 
@@ -13,7 +13,7 @@ public class WorkloadThread implements Runnable {
         workloads.add(workload);
     }
 
-    public WorkloadThread() {
+    public WorkLoadThread() {
         workloads = Queues.newArrayDeque();
     }
 

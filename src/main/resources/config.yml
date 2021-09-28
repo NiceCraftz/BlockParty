@@ -1,19 +1,20 @@
-commands:
-  no-args: "&bSpecifica un &fargomento&b!"
-  unknown-arg: "&bArgomento &fnon riconosciuto&b!"
-  no-perms: "&bNon hai il &fpermesso &bdi &feseguire &bquesto comando!"
+no-args: "&bSpecifica un &fargomento&b!"
+unknown-arg: "&bArgomento &fnon riconosciuto&b!"
+no-perms: "&bNon hai il &fpermesso &bdi &feseguire &bquesto comando!"
 
+player-death: "&f%s &bè morto, ne rimangono &f%d"
+point: "&b+&f1 &bPunto"
+died: "&bSei &fmorto&b!"
 
-events:
-  player-death: "&f%s% &bè morto, ne rimangono &f%d%"
-  point: "&b+&f1 &bPunto"
-  died: "&bSei &fmorto&b!"
+reloaded: "&bConfigurazione &fricaricata&b!"
+game-end: "&bPartita &fterminata&b!"
+status-format: "&bLo stato attuale del game è %s"
 
-locations:
-  spawn: ""
-  lobby: ""
-  corner-a: ""
-  corner-b: ""
+error: "&bNon puoi impostare questo stato durante %s"
+status-set: "&bImpostato lo stato a %s!"
+difficulty-announcement: "&bNuova difficoltà impostata su %s&b!"
 
-settings:
-  death-y: 30
+timer-announce: "&bLa partita inizerà in &f%d"
+
+death-y: 30
+countdown: 15
