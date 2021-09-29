@@ -37,7 +37,7 @@ public class CooldownConsumer implements Consumer<BlockPartyGame> {
             }
 
             if(countdown == 10 || countdown <= 5) {
-                Bukkit.broadcastMessage(ConfigurationHelper.getFormattedString(partyGame.getBlockParty(), "timer-announce", countdown))
+                Bukkit.broadcastMessage(ConfigurationHelper.getFormattedString(partyGame.getBlockParty(), "timer-announce", countdown));
             }
 
             if(countdown == 0) {

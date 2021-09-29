@@ -10,9 +10,15 @@ public class StartingConsumer implements Consumer<BlockPartyGame> {
     @Override
     public void accept(BlockPartyGame blockPartyGame) {
 
-        blockPartyGame.getUserMap().values().forEach(coralUser -> {
-            blockPartyGame.getBlockParty().getWorkLoadThread().add(new TeleportablePlayer(coralUser.getPlayer(), ConfigurationHelper.getLocation(blockPartyGame.getBlockParty(), "spawn")));
-        });
+
+        blockPartyGame.getUserMap().values().forEach(coralUser ->
+                blockPartyGame.getBlockParty()
+                        .getWorkLoadThread()
+                        .add(new TeleportablePlayer(coralUser.getPlayer(),
+                                ConfigurationHelper.getLocation(blockPartyGame.getBlockParty(),
+                                        "spawn"))));
+
+        blockPartyGame.startGame();
 
     }
 }

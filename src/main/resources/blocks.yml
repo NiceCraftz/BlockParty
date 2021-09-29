@@ -1,0 +1,5 @@
+blocks:
+  yellow:
+    name: "&e&lGiallo"
+    material: "WOOL"
+    data: 4

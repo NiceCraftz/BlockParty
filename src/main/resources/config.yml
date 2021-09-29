@@ -13,8 +13,15 @@ status-format: "&bLo stato attuale del game è %s"
 error: "&bNon puoi impostare questo stato durante %s"
 status-set: "&bImpostato lo stato a %s!"
 difficulty-announcement: "&bNuova difficoltà impostata su %s&b!"
+block-announcement: "&bIl prossimo colore sarà %s&b!"
 
-timer-announce: "&bLa partita inizerà in &f%d"
+winner-announce: "&bIl vincitore della partita è &f%s&b con &f%d% punti&b!"
+floor-announce: "&bIl terreno si romperà in &f%d&b!"
+timer-announce: "&bLa partita inizerà in &f%d&b!"
+
+kick-message: "&bPartita Terminata!"
+stop-time: 15
 
 death-y: 30
+refill-time: 5
 countdown: 15

@@ -9,14 +9,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @RequiredArgsConstructor
 public class PlaceableBlock implements Workload {
-    private final Location loc;
-    private final List<CustomBlock> materialList;
+    private final Location location;
+    private final List<CustomBlock> blockList;
 
     @Override
     public void compute() {
-        int rand = ThreadLocalRandom.current().nextInt(materialList.size());
-        final CustomBlock cb = materialList.get(rand);
-        loc.getBlock().setType(cb.getMat());
-        loc.getBlock().setData(cb.getData());
+        int rand = ThreadLocalRandom.current().nextInt(blockList.size());
+        final CustomBlock cb = blockList.get(rand);
+        location.getBlock().setType(cb.getMat());
+        location.getBlock().setData(cb.getData());
     }
 }

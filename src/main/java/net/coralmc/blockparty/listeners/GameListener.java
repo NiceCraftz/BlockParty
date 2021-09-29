@@ -6,6 +6,7 @@ import me.imbuzz.dev.gamemaker.api.chat.ChatChannel;
 import net.coralmc.blockparty.BlockParty;
 import net.coralmc.blockparty.events.CustomDeathEvent;
 import net.coralmc.blockparty.game.BlockPartyGame;
+import net.coralmc.blockparty.game.GameUtils;
 import net.coralmc.blockparty.objects.CoralUser;
 import net.coralmc.blockparty.objects.TeleportablePlayer;
 import net.coralmc.blockparty.utils.Utils;
@@ -47,7 +48,7 @@ public class GameListener implements Listener {
         Optional<CoralUser> userOptional = Utils.getUser(blockParty, player.getUniqueId());
         if (!userOptional.isPresent()) return;
 
-        Utils.announceDeath(blockParty, player);
+        GameUtils.announceDeath(blockParty, player);
         game.getUserMap().remove(player.getUniqueId());
     }
 
@@ -88,6 +89,6 @@ public class GameListener implements Listener {
         );
 
         game.getUserMap().remove(userPlayer.getUniqueId());
-        Utils.announceDeath(blockParty, userPlayer);
+        GameUtils.announceDeath(blockParty, userPlayer);
     }
 }
