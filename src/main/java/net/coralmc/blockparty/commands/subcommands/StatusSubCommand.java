@@ -4,12 +4,9 @@ import lombok.RequiredArgsConstructor;
 import me.imbuzz.dev.gamemaker.api.GameStatus;
 import net.coralmc.blockparty.BlockParty;
 import net.coralmc.blockparty.commands.SubCommand;
-import net.coralmc.blockparty.utils.ColorAPI;
-import net.coralmc.blockparty.utils.ConfigurationHelper;
 import org.bukkit.command.CommandSender;
 
-import static net.coralmc.blockparty.utils.ColorAPI.*;
-import static net.coralmc.blockparty.utils.ConfigurationHelper.*;
+import static net.coralmc.blockparty.utils.ConfigHelper.getFormattedString;
 
 @RequiredArgsConstructor
 public class StatusSubCommand implements SubCommand {
@@ -29,6 +26,6 @@ public class StatusSubCommand implements SubCommand {
     @Override
     public void execute(CommandSender commandSender, String[] args) {
         GameStatus gameStatus = blockParty.getMinigameData().getStatus();
-        commandSender.sendMessage(color(getString(blockParty, "status-format", gameStatus.toString())));
+        commandSender.sendMessage(getFormattedString(blockParty, "status-format", gameStatus.toString()));
     }
 }

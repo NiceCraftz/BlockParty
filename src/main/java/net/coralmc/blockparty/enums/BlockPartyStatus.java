@@ -20,4 +20,8 @@ public enum BlockPartyStatus {
 
     private final String name;
     private final Consumer<BlockPartyGame> consumer;
+
+    public String getName() {
+        return name;
+    }
 }

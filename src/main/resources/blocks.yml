@@ -3,3 +3,11 @@ blocks:
     name: "&e&lGiallo"
     material: "WOOL"
     data: 4
+  red:
+    name: "&c&lRosso"
+    material: "WOOL"
+    data: 14
+  purple:
+    name: "&5&lViola"
+    material: "WOOL"
+    data: 10

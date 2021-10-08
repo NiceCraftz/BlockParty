@@ -1,6 +1,7 @@
-package net.coralmc.blockparty.objects;
+package net.coralmc.blockparty.workloads.objects;
 
 import lombok.RequiredArgsConstructor;
+import net.coralmc.blockparty.objects.CustomBlock;
 import net.coralmc.blockparty.workloads.Workload;
 import org.bukkit.Location;
 

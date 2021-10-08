@@ -5,6 +5,9 @@ import net.coralmc.blockparty.BlockParty;
 import net.coralmc.blockparty.objects.CoralUser;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +18,9 @@ public class Utils {
         return location.getWorld().getName() + ";"
                 + location.getBlockX() + ";"
                 + location.getBlockY() + ";"
-                + location.getBlockZ();
+                + location.getBlockZ() + ";"
+                + location.getYaw() + ";"
+                + location.getPitch();
     }
 
     public static Location stringToLocation(String string) {
@@ -23,11 +28,22 @@ public class Utils {
         return new Location(Bukkit.getWorld(s[0]),
                 Double.parseDouble(s[1]),
                 Double.parseDouble(s[2]),
-                Double.parseDouble(s[3]));
+                Double.parseDouble(s[3]),
+                Float.parseFloat(s[4]),
+                Float.parseFloat(s[5]));
+
     }
 
     public static Optional<CoralUser> getUser(BlockParty blockParty, UUID uuid) {
         return Optional.ofNullable(blockParty.getGame().getUserMap().get(uuid));
+    }
+
+    public static ItemStack getAxe(BlockParty blockParty) {
+        ItemStack itemStack = new ItemStack(Material.IRON_AXE, 1);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(ConfigHelper.getFormattedString(blockParty, "axe-name"));
+        itemStack.setItemMeta(itemMeta);
+        return itemStack;
     }
 
     public static List<Location> loadLocations(Location loc1, Location loc2) {

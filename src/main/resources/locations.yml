@@ -1,5 +1,5 @@
-spawn: ""
-lobby: ""
+spawn: "world;100;100;100;0;0"
+lobby: "world;100;100;100;0;0"
 
-corner-a: "world;100;0;100"
-corner-b: "world;-100;0;-100"
+corner-a: "world;100;100;100;0;0"
+corner-b: "world;100;100;100;0;0"

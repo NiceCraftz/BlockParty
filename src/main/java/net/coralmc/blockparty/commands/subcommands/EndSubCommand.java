@@ -4,10 +4,9 @@ import lombok.RequiredArgsConstructor;
 import net.coralmc.blockparty.BlockParty;
 import net.coralmc.blockparty.commands.SubCommand;
 import net.coralmc.blockparty.enums.BlockPartyStatus;
-import net.coralmc.blockparty.game.BlockPartyData;
 import org.bukkit.command.CommandSender;
 
-import static net.coralmc.blockparty.utils.ConfigurationHelper.getFormattedString;
+import static net.coralmc.blockparty.utils.ConfigHelper.getFormattedString;
 
 @RequiredArgsConstructor
 public class EndSubCommand implements SubCommand {
@@ -25,9 +24,7 @@ public class EndSubCommand implements SubCommand {
 
     @Override
     public void execute(CommandSender commandSender, String[] args) {
-        BlockPartyData blockPartyData = blockParty.getGame().getData();
-
-        blockPartyData.setStatus(BlockPartyStatus.END);
-        commandSender.sendMessage(getFormattedString(blockParty, "status-set", blockPartyData.getStatus()));
+        blockParty.getGame().setStatus(BlockPartyStatus.END);
+        commandSender.sendMessage(getFormattedString(blockParty, "status-set", blockParty.getGame().getStatus().getName()));
     }
 }

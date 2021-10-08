@@ -2,16 +2,16 @@ package net.coralmc.blockparty.game;
 
 import com.google.common.collect.Maps;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import me.imbuzz.dev.gamemaker.api.GameStatus;
 import net.coralmc.blockparty.BlockParty;
 import net.coralmc.blockparty.enums.BlockPartyStatus;
 import net.coralmc.blockparty.enums.GameDifficulty;
 import net.coralmc.blockparty.game.task.GameTask;
 import net.coralmc.blockparty.objects.CoralUser;
 import net.coralmc.blockparty.objects.CustomBlock;
-import net.coralmc.blockparty.objects.PlaceableBlock;
-import net.coralmc.blockparty.objects.RemovableBlock;
+import net.coralmc.blockparty.utils.GameUtils;
+import net.coralmc.blockparty.workloads.objects.PlaceableBlock;
+import net.coralmc.blockparty.workloads.objects.RemovableBlock;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
@@ -20,36 +20,43 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
-import static net.coralmc.blockparty.utils.ConfigurationHelper.*;
+import static net.coralmc.blockparty.utils.ConfigHelper.*;
 import static net.coralmc.blockparty.utils.Utils.loadLocations;
 
 @Data
 public class BlockPartyGame {
 
+    private GameDifficulty gameDifficulty = GameDifficulty.EASY;
     private final Map<UUID, CoralUser> userMap = Maps.newHashMap();
+    private final BlockParty blockParty;
+
     private List<CustomBlock> blockList;
     private List<Location> locationList;
 
-    private final BlockPartyData data;
-    private final BlockParty blockParty;
-
-    private GameDifficulty gameDifficulty = GameDifficulty.EASY;
-    private CustomBlock customBlock;
+    private BlockPartyStatus status;
     private GameTask gameTask;
+    private CustomBlock customBlock;
 
-    public BlockPartyGame(BlockParty blockParty, BlockPartyData data) {
+    public BlockPartyGame(BlockParty blockParty) {
         this.blockParty = blockParty;
-        this.data = data;
-        data.setStatus(BlockPartyStatus.LOBBY);
-
+        setStatus(BlockPartyStatus.STARTING);
         init();
+    }
+
+    public void setStatus(BlockPartyStatus status) {
+        if (this.status == status) return;
+        this.status = status;
+
+        status.getConsumer().accept(this);
+
+        blockParty.getMinigameData().setStatus(GameStatus.valueOf(status.toString()));
+        blockParty.getRedisUpdater().updateStatus(blockParty.getMinigameData());
     }
 
     private void init() {
         locationList = loadLocations(getLocation(blockParty, "corner-a"), getLocation(blockParty, "corner-b"));
         blockList = GameUtils.loadBlocks(blockParty);
     }
-
 
     public void startGame() {
         refill();
@@ -58,12 +65,14 @@ public class BlockPartyGame {
     }
 
     public void blockTime() {
-        CustomBlock newBlock;
-        do {
+        CustomBlock newBlock = blockList.get(ThreadLocalRandom.current().nextInt(blockList.size()));
+
+        while (customBlock.equals(newBlock)) {
             newBlock = blockList.get(ThreadLocalRandom.current().nextInt(blockList.size()));
-        } while (customBlock.equals(newBlock));
+        }
 
         customBlock = newBlock;
+
         Bukkit.broadcastMessage(getFormattedString(blockParty, "block-announcement", customBlock.getName()));
         userMap.values().forEach(coralUser -> coralUser.getPlayer().getInventory().setItem(4, customBlock.getItem()));
     }

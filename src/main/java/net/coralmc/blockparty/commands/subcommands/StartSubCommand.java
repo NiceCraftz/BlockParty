@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import net.coralmc.blockparty.BlockParty;
 import net.coralmc.blockparty.commands.SubCommand;
 import net.coralmc.blockparty.enums.BlockPartyStatus;
-import net.coralmc.blockparty.game.BlockPartyData;
+import net.coralmc.blockparty.utils.ConfigHelper;
 import org.bukkit.command.CommandSender;
 
-import static net.coralmc.blockparty.utils.ConfigurationHelper.getFormattedString;
+import static net.coralmc.blockparty.utils.ConfigHelper.getFormattedString;
 
 @RequiredArgsConstructor
 public class StartSubCommand implements SubCommand {
@@ -25,10 +25,13 @@ public class StartSubCommand implements SubCommand {
 
     @Override
     public void execute(CommandSender commandSender, String[] args) {
-        BlockPartyData blockPartyData = blockParty.getGame().getData();
+        if(!(blockParty.getGame().getUserMap().size() >= 2)) {
+            commandSender.sendMessage(ConfigHelper.getFormattedString(blockParty, "not-enough"));
+            return;
+        }
 
-        blockPartyData.setStatus(BlockPartyStatus.PLAYING);
-        commandSender.sendMessage(getFormattedString(blockParty, "status-set", blockPartyData.getStatus()));
+        blockParty.getGame().setStatus(BlockPartyStatus.PLAYING);
+        commandSender.sendMessage(getFormattedString(blockParty, "status-set", blockParty.getGame().getStatus()));
 
     }
 }

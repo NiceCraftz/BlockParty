@@ -3,13 +3,14 @@ package net.coralmc.blockparty.game.task;
 import net.coralmc.blockparty.BlockParty;
 import net.coralmc.blockparty.enums.BlockPartyStatus;
 import net.coralmc.blockparty.game.BlockPartyGame;
-import net.coralmc.blockparty.utils.ConfigurationHelper;
+import net.coralmc.blockparty.utils.ConfigHelper;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import static net.coralmc.blockparty.utils.ConfigurationHelper.*;
+import static net.coralmc.blockparty.utils.ConfigHelper.getFormattedString;
+import static net.coralmc.blockparty.utils.ConfigHelper.getInt;
 
 public class GameTask extends BukkitRunnable {
     private final BlockPartyGame blockPartyGame;
@@ -30,18 +31,24 @@ public class GameTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        if (blockPartyGame.getData().getStatus() == BlockPartyStatus.END) {
+
+        if (blockPartyGame.getStatus() == BlockPartyStatus.END) {
             this.cancel();
             return;
         }
 
         if (Bukkit.getOnlinePlayers().size() <= 1 || blockPartyGame.getUserMap().size() <= 1) {
-            blockPartyGame.getData().setStatus(BlockPartyStatus.END);
+            blockPartyGame.setStatus(BlockPartyStatus.END);
             cancel();
             return;
         }
 
         time--;
+
+        if (time < 0) {
+            return;
+        }
+
         if (blockPartyGame.getGameDifficulty().getTriggerTime() == time) {
             blockPartyGame.blockTime();
         }
@@ -50,9 +57,11 @@ public class GameTask extends BukkitRunnable {
             blockPartyGame.getUserMap().values().forEach(coralUser -> {
                 Player player = coralUser.getPlayer();
                 player.playSound(player.getLocation(), Sound.ZOMBIE_WOOD, 1, 0);
-                player.sendMessage(getFormattedString(blockParty, "floor-announce", time));
             });
+
+            Bukkit.broadcastMessage(getFormattedString(blockParty, "floor-announce", time));
         }
+
 
         if (time == 0) {
             blockPartyGame.getUserMap().values().forEach(coralUser -> {
@@ -70,7 +79,7 @@ public class GameTask extends BukkitRunnable {
 
                 roundTime = Math.max(2, --roundTime);
                 time = roundTime;
-            }, 20L * ConfigurationHelper.getInt(blockParty, "refill-time"));
+            }, 20L * ConfigHelper.getInt(blockParty, "refill-time"));
 
         }
     }

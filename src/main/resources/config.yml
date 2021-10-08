@@ -1,8 +1,11 @@
 no-args: "&bSpecifica un &fargomento&b!"
 unknown-arg: "&bArgomento &fnon riconosciuto&b!"
-no-perms: "&bNon hai il &fpermesso &bdi &feseguire &bquesto comando!"
+no-perms: "&bHai bisogno del permesso &f%s &bper eseguire questo comando!"
+not-player: "&bDevi essere un &fgiocatore &bper eseguire questo comando!"
+locations-invalid: "&bLe locazioni sono &finvalide&b!"
+not-enough: "&bNon ci sono abbastanza giocatori per iniziare la partita!"
 
-player-death: "&f%s &bè morto, ne rimangono &f%d"
+player-death: "&f%s &bè morto, ne rimangono &f%s"
 point: "&b+&f1 &bPunto"
 died: "&bSei &fmorto&b!"
 
@@ -15,13 +18,27 @@ status-set: "&bImpostato lo stato a %s!"
 difficulty-announcement: "&bNuova difficoltà impostata su %s&b!"
 block-announcement: "&bIl prossimo colore sarà %s&b!"
 
-winner-announce: "&bIl vincitore della partita è &f%s&b con &f%d% punti&b!"
-floor-announce: "&bIl terreno si romperà in &f%d&b!"
-timer-announce: "&bLa partita inizerà in &f%d&b!"
+cancel-announce: "&bCountdown terminato, non ci sono abbastanza giocatori, attendiamo."
+winner-announce: "&bIl vincitore della partita è &f%s&b con &f%s punti&b!"
+floor-announce: "&bIl terreno si romperà in &f%s&b!"
+timer-announce: "&bLa partita inizerà in &f%s&b!"
 
+spawn-set: "&bImpostato correttamente lo &fspawn!"
+lobby-set: "&bImpostata correttamente la &flobby!"
+locations-set: "&bImpostata correttamente la &ftavola!"
+
+axe-add: "&bAggiunto lo &fstrumento di selezione &bal tuo inventario!"
+position-set: "&bPosizione Elaborata &fX: %s - Z: %s"
+
+block-load: "Caricato con successo %s con data %s!"
+
+axe-name: "&bSelection Tool"
 kick-message: "&bPartita Terminata!"
-stop-time: 15
 
+round-time: 15
 death-y: 30
 refill-time: 5
-countdown: 15
+kick-time: 0
+
+min-players: 20
+countdown: 10

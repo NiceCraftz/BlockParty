@@ -1,13 +1,11 @@
 package net.coralmc.blockparty.commands.subcommands;
 
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import net.coralmc.blockparty.BlockParty;
 import net.coralmc.blockparty.commands.SubCommand;
+import net.coralmc.blockparty.utils.GameUtils;
+import net.coralmc.blockparty.utils.ConfigHelper;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
-
-import java.io.IOException;
 
 @RequiredArgsConstructor
 public class ReloadSubCommand implements SubCommand {
@@ -23,15 +21,12 @@ public class ReloadSubCommand implements SubCommand {
         return "reload";
     }
 
-    @SneakyThrows(Exception.class)
     @Override
     public void execute(CommandSender commandSender, String[] args) {
-        blockParty.getFiles().values().forEach(file -> {
-            try {
-                file.getConfiguration().load(file.getFile());
-            } catch (IOException | InvalidConfigurationException e) {
-                e.printStackTrace();
-            }
-        });
+        blockParty.getConfigFile().reload();
+        blockParty.getBlocksFile().reload();
+
+        blockParty.getGame().setBlockList(GameUtils.loadBlocks(blockParty));
+        commandSender.sendMessage(ConfigHelper.getFormattedString(blockParty, "reloaded"));
     }
 }

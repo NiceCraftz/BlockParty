@@ -6,7 +6,7 @@
 
     <groupId>net.coralmc</groupId>
     <artifactId>BlockParty</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-BETA</version>
     <packaging>jar</packaging>
 
     <name>BlockParty</name>
@@ -56,6 +56,10 @@
 
     <repositories>
         <repository>
+            <id>coralmc-repo</id>
+            <url>http://repo.coralmc.it</url>
+        </repository>
+        <repository>
             <id>spigotmc-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
@@ -67,13 +71,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>me.imbuzz.dev</groupId>
-            <artifactId>GameMaker</artifactId>
-            <version>1.0</version>
-            <systemPath>${basedir}/libs/GameMaker.jar</systemPath>
-            <scope>system</scope>
-        </dependency>
-        <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
@@ -84,6 +81,12 @@
             <artifactId>lombok</artifactId>
             <version>1.18.20</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.imbuzz.dev</groupId>
+            <artifactId>GameMaker</artifactId>
+            <version>1.0.2-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

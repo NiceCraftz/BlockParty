@@ -5,6 +5,8 @@ prefix: BlockParty
 authors: [ NiceCraftz ]
 description: BlockParty plugin for CoralMC
 website: https://coralmc.it
+depend:
+  - "Dictation"
 
 commands:
   blockparty:

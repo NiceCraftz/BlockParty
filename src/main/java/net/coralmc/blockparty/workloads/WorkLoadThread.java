@@ -1,6 +1,7 @@
 package net.coralmc.blockparty.workloads;
 
 import com.google.common.collect.Queues;
+import org.bukkit.Bukkit;
 
 import java.util.ArrayDeque;
 import java.util.Objects;
@@ -20,7 +21,7 @@ public class WorkLoadThread implements Runnable {
     @Override
     public void run() {
         long stopTime = System.currentTimeMillis() + MAX_MS_PER_TICK;
-        while(!workloads.isEmpty() && stopTime <= System.currentTimeMillis()) {
+        while(!workloads.isEmpty() && System.currentTimeMillis() <= stopTime) {
             Objects.requireNonNull(workloads.poll()).compute();
         }
     }

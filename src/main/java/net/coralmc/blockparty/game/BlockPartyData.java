@@ -2,31 +2,25 @@ package net.coralmc.blockparty.game;
 
 import lombok.Getter;
 import me.imbuzz.dev.gamemaker.api.GameStatus;
-import me.imbuzz.dev.gamemaker.communications.MinigameData;
-import me.imbuzz.dev.gamemaker.communications.RedisUpdater;
 import net.coralmc.blockparty.BlockParty;
 import net.coralmc.blockparty.enums.BlockPartyStatus;
 
 @Getter
 public class BlockPartyData {
-    private final MinigameData minigameData;
-    private final RedisUpdater redisUpdater;
-    private final BlockPartyGame blockPartyGame;
+    private final BlockParty blockParty;
     private BlockPartyStatus status;
 
     public BlockPartyData(BlockParty blockParty) {
-        minigameData = blockParty.getMinigameData();
-        redisUpdater = blockParty.getRedisUpdater();
-        blockPartyGame = blockParty.getGame();
+        this.blockParty = blockParty;
     }
 
     public void setStatus(BlockPartyStatus status) {
         if (this.status == status) return;
         this.status = status;
 
-        status.getConsumer().accept(blockPartyGame);
-        minigameData.setStatus(GameStatus.valueOf(status.toString()));
-        redisUpdater.updateStatus(minigameData);
+        status.getConsumer().accept(blockParty.getGame());
+        blockParty.getMinigameData().setStatus(GameStatus.valueOf(status.toString()));
+        blockParty.getRedisUpdater().updateStatus(blockParty.getMinigameData());
     }
 
 }
