@@ -88,7 +88,7 @@ public class GameListener implements Listener {
         prepare(status, player, coralUser);
 
         if (Bukkit.getOnlinePlayers().size() >= ConfigHelper.getInt(blockParty, "min-players")) {
-            blockParty.getGame().setStatus(BlockPartyStatus.STARTING);
+            blockParty.getGame().setStatus(BlockPartyStatus.LOBBY);
         }
     }
 

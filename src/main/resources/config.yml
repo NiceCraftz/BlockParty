@@ -38,7 +38,6 @@ kick-message: "&bPartita Terminata!"
 round-time: 15
 death-y: 30
 refill-time: 5
-kick-time: 0
 
 min-players: 20
 countdown: 10
