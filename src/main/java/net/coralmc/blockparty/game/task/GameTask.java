@@ -1,9 +1,12 @@
 package net.coralmc.blockparty.game.task;
 
+import lombok.Data;
+import lombok.Getter;
 import net.coralmc.blockparty.BlockParty;
 import net.coralmc.blockparty.enums.BlockPartyStatus;
 import net.coralmc.blockparty.game.BlockPartyGame;
 import net.coralmc.blockparty.utils.ConfigHelper;
+import net.coralmc.blockparty.utils.GameUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -12,6 +15,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import static net.coralmc.blockparty.utils.ConfigHelper.getFormattedString;
 import static net.coralmc.blockparty.utils.ConfigHelper.getInt;
 
+@Data
 public class GameTask extends BukkitRunnable {
     private final BlockPartyGame blockPartyGame;
     private final BlockParty blockParty;
@@ -19,6 +23,7 @@ public class GameTask extends BukkitRunnable {
     private int time;
     private int roundTime;
     private int round;
+    private int playersLeft;
 
     public GameTask(BlockPartyGame blockPartyGame) {
         this.blockPartyGame = blockPartyGame;
@@ -26,6 +31,7 @@ public class GameTask extends BukkitRunnable {
 
         roundTime = getInt(blockParty, "round-time");
         time = roundTime;
+        playersLeft = blockPartyGame.getUserMap().size();
     }
 
 
@@ -44,6 +50,7 @@ public class GameTask extends BukkitRunnable {
         }
 
         time--;
+        blockPartyGame.getUserMap().values().forEach(coralUser -> GameUtils.updateBoard(blockParty, coralUser, "game"));
 
         if (time < 0) {
             return;
@@ -79,6 +86,7 @@ public class GameTask extends BukkitRunnable {
 
                 roundTime = Math.max(2, --roundTime);
                 time = roundTime;
+
             }, 20L * ConfigHelper.getInt(blockParty, "refill-time"));
 
         }

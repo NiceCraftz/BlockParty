@@ -1,0 +1,20 @@
+game-scoreboard-title: "&b&lBlockParty"
+game-scoreboard:
+  - "&c&lGiocatori Rimasti"
+  - "&f%left% &7Giocatori"
+  - ""
+  - "&b&lInformazioni Game"
+  - "&7Coins: &f%coins%"
+  - "&7Round: &f%round%"
+  - "&7Velocità Round: %speed%s"
+  - ""
+  - "&8&m------------"
+  - "&fplay.&bcoralmc&f.it"
+
+
+join-scoreboard-title: "&b&lCoral"
+join-scoreboard:
+  - "&7Nome: %player%"
+  - ""
+  - "&8&m------------"
+  - "&fplay.&bcoralmc&f.it"

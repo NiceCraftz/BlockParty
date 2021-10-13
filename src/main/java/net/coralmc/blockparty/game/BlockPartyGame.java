@@ -56,12 +56,15 @@ public class BlockPartyGame {
     private void init() {
         locationList = loadLocations(getLocation(blockParty, "corner-a"), getLocation(blockParty, "corner-b"));
         blockList = GameUtils.loadBlocks(blockParty);
+        customBlock = blockList.get(ThreadLocalRandom.current().nextInt(blockList.size()));
     }
 
     public void startGame() {
         refill();
         gameTask = new GameTask(this);
         gameTask.runTaskTimer(blockParty, 0, 20);
+
+        userMap.values().forEach(coralUser -> GameUtils.updateBoard(blockParty, coralUser, "game"));
     }
 
     public void blockTime() {

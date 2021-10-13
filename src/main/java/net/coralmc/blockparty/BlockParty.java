@@ -23,9 +23,9 @@ public final class BlockParty extends GameMaker {
     private CoralFile configFile;
     private CoralFile locationsFile;
     private CoralFile blocksFile;
+    private CoralFile scoreboardFile;
 
     private BlockPartyGame game;
-
     private WorkLoadThread workLoadThread;
 
     @Override
@@ -36,6 +36,7 @@ public final class BlockParty extends GameMaker {
         configFile = new CoralFile(this, "config.yml");
         locationsFile = new CoralFile(this, "locations.yml");
         blocksFile = new CoralFile(this, "blocks.yml");
+        scoreboardFile = new CoralFile(this, "scoreboards.yml");
 
         game = new BlockPartyGame(this);
         workLoadThread = new WorkLoadThread();

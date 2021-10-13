@@ -15,7 +15,7 @@ public class RemovableBlock implements Workload {
     @Override
     public void compute() {
         Block block = location.getBlock();
-        if(block.getType() != customBlock.getMat() || block.getData() != customBlock.getData()) {
+        if (block.getType() != customBlock.getMat() || block.getData() != customBlock.getData()) {
             block.setType(Material.AIR);
         }
     }

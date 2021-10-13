@@ -6,7 +6,7 @@ locations-invalid: "&bLe locazioni sono &finvalide&b!"
 not-enough: "&bNon ci sono abbastanza giocatori per iniziare la partita!"
 
 player-death: "&f%s &bè morto, ne rimangono &f%s"
-point: "&b+&f1 &bPunto"
+point: "&b+&f1 &bCoin"
 died: "&bSei &fmorto&b!"
 
 reloaded: "&bConfigurazione &fricaricata&b!"

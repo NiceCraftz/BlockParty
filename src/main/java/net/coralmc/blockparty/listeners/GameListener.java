@@ -6,10 +6,10 @@ import net.coralmc.blockparty.BlockParty;
 import net.coralmc.blockparty.enums.BlockPartyStatus;
 import net.coralmc.blockparty.events.CustomDeathEvent;
 import net.coralmc.blockparty.game.BlockPartyGame;
-import net.coralmc.blockparty.utils.GameUtils;
 import net.coralmc.blockparty.objects.CoralUser;
 import net.coralmc.blockparty.objects.MapCorners;
 import net.coralmc.blockparty.utils.ConfigHelper;
+import net.coralmc.blockparty.utils.GameUtils;
 import net.coralmc.blockparty.utils.Utils;
 import net.coralmc.blockparty.workloads.objects.TeleportablePlayer;
 import org.bukkit.Bukkit;
@@ -58,7 +58,7 @@ public class GameListener implements Listener {
         Optional<CoralUser> userOptional = Utils.getUser(blockParty, player.getUniqueId());
         if (!userOptional.isPresent()) return;
 
-        if (blockParty.getMinigameData().getStatus() == GameStatus.PLAYING) {
+        if (blockParty.getMinigameData().getStatus() == GameStatus.PLAYING && !userOptional.get().isSpectator()) {
             GameUtils.announceDeath(blockParty, player);
         }
 
@@ -67,9 +67,11 @@ public class GameListener implements Listener {
 
     private void prepare(GameStatus status, Player player, CoralUser coralUser) {
         player.getInventory().clear();
+        GameUtils.updateBoard(blockParty, coralUser, "join");
 
         if (status == GameStatus.PLAYING || status == GameStatus.END) {
             coralUser.setSpectator();
+            return;
         }
 
         player.setGameMode(GameMode.SURVIVAL);
@@ -178,12 +180,13 @@ public class GameListener implements Listener {
             player.sendMessage(ConfigHelper.getFormattedString(
                     blockParty, "position-set", location.getX(), location.getZ()
             ));
-
+            e.setCancelled(true);
             return;
         }
 
         mapCorners.setFirstLocation(block.getLocation());
         blockParty.getCornersMap().replace(player.getUniqueId(), mapCorners);
+        e.setCancelled(true);
 
         player.sendMessage(ConfigHelper.getFormattedString(
                 blockParty, "position-set", location.getX(), location.getZ()
