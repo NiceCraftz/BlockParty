@@ -67,17 +67,18 @@ public class GameListener implements Listener {
 
     private void prepare(GameStatus status, Player player, CoralUser coralUser) {
         player.getInventory().clear();
-        GameUtils.updateBoard(blockParty, coralUser, "join");
 
         if (status == GameStatus.PLAYING || status == GameStatus.END) {
             coralUser.setSpectator();
             return;
         }
 
+        GameUtils.setJoinBoard(blockParty, coralUser);
+
         player.setGameMode(GameMode.SURVIVAL);
-        blockParty.getWorkLoadThread().add(new TeleportablePlayer(player,
-                getLocation(blockParty, "lobby").add(0.5, 0, 0.5))
-        );
+        blockParty.getWorkLoadThread().add(new TeleportablePlayer(
+                player, getLocation(blockParty, "lobby").add(0.5, 0, 0.5)
+        ));
     }
 
     @EventHandler

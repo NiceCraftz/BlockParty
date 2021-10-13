@@ -58,25 +58,39 @@ public class GameUtils {
         return Optional.empty();
     }
 
-    public static String[] getPreparedBoard(BlockParty blockParty, CoralUser coralUser, String scoreboard) {
+    public static void setGameBoard(BlockParty blockParty, CoralUser coralUser) {
+        BPlayerBoard bPlayerBoard = Netherboard.instance().createBoard(
+                coralUser.getPlayer(),
+                color(blockParty.getScoreboardFile().getConfiguration().getString("title")));
+
         BlockPartyGame game = blockParty.getGame();
-        List<String> workedList = Lists.newArrayList();
-        for (String s : getStringList(blockParty, scoreboard + "-scoreboard")) {
+        List<String> workList = Lists.newArrayList();
+
+        for (String s : getStringList(blockParty, "game")) {
             s = s.replace("%left%", game.getGameTask().getPlayersLeft() + "");
             s = s.replace("%round%", game.getGameTask().getRound() + "");
             s = s.replace("%speed%", game.getGameTask().getTime() + "");
             s = s.replace("%coins%", coralUser.getCoins() + "");
             s = s.replace("%player%", coralUser.getPlayer().getName());
-            workedList.add(color(s));
+            workList.add(color(s));
         }
-        return workedList.toArray(new String[0]);
+
+        bPlayerBoard.setAll(workList.toArray(new String[0]));
     }
 
-    public static void updateBoard(BlockParty blockParty, CoralUser coralUser, String scoreboard) {
-        BPlayerBoard bPlayerBoard = Netherboard.instance()
-                .createBoard(coralUser.getPlayer(), getScoreboardString(blockParty, scoreboard + "-scoreboard-title"));
+    public static void setJoinBoard(BlockParty blockParty, CoralUser coralUser) {
+        BPlayerBoard bPlayerBoard = Netherboard.instance().createBoard(
+                coralUser.getPlayer(),
+                color(blockParty.getScoreboardFile().getConfiguration().getString("title")));
 
-        bPlayerBoard.setAll(getPreparedBoard(blockParty, coralUser, scoreboard));
+        List<String> workList = Lists.newArrayList();
+
+        for (String s : blockParty.getScoreboardFile().getConfiguration().getStringList("join")) {
+            s = s.replace("%player%", coralUser.getPlayer().getName());
+            workList.add(color(s));
+        }
+
+        bPlayerBoard.setAll(workList.toArray(new String[0]));
     }
 
     public static void announceDeath(BlockParty blockParty, Player player) {
@@ -95,7 +109,7 @@ public class GameUtils {
             coralPlayer.sendMessage(getFormattedString(blockParty, "point"));
             coralUser.setCoins(coralUser.getCoins() + 1);
 
-            updateBoard(blockParty, coralUser, "game");
+            setGameBoard(blockParty, coralUser);
 
             if (blockPartyGame.getGameTask().getPlayersLeft() <= 1) {
                 blockPartyGame.setStatus(BlockPartyStatus.END);

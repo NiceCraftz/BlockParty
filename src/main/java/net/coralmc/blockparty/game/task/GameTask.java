@@ -50,7 +50,7 @@ public class GameTask extends BukkitRunnable {
         }
 
         time--;
-        blockPartyGame.getUserMap().values().forEach(coralUser -> GameUtils.updateBoard(blockParty, coralUser, "game"));
+        blockPartyGame.getUserMap().values().forEach(coralUser -> GameUtils.setGameBoard(blockParty, coralUser));
 
         if (time < 0) {
             return;

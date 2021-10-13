@@ -25,6 +25,7 @@ public class ReloadSubCommand implements SubCommand {
     public void execute(CommandSender commandSender, String[] args) {
         blockParty.getConfigFile().reload();
         blockParty.getBlocksFile().reload();
+        blockParty.getScoreboardFile().reload();
 
         blockParty.getGame().setBlockList(GameUtils.loadBlocks(blockParty));
         commandSender.sendMessage(ConfigHelper.getFormattedString(blockParty, "reloaded"));

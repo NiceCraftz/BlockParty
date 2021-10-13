@@ -64,7 +64,7 @@ public class BlockPartyGame {
         gameTask = new GameTask(this);
         gameTask.runTaskTimer(blockParty, 0, 20);
 
-        userMap.values().forEach(coralUser -> GameUtils.updateBoard(blockParty, coralUser, "game"));
+        userMap.values().forEach(coralUser -> GameUtils.setGameBoard(blockParty, coralUser));
     }
 
     public void blockTime() {

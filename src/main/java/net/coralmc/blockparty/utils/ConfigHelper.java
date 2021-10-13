@@ -18,7 +18,7 @@ public class ConfigHelper {
     }
 
     public static List<String> getStringList(BlockParty blockParty, String path) {
-        return blockParty.getConfigFile().getConfiguration().getStringList(path);
+        return blockParty.getScoreboardFile().getConfiguration().getStringList(path);
     }
 
     public static String color(String s) {
